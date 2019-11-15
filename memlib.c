@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <errno.h>
-
-
-static char *mem_heap;
-static char *mem_brk;
-static char *mem_max_addr;
+#include "memlib.h"
 
 
 void mem_init(void)

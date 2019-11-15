@@ -1,23 +1,8 @@
-#define WSIZE 4
-#define DSIZE 8
-#define CHUNKSIZE (1<<12)
+#include "mm.h"
+#include "memlib.h"
 
-#define MAX(x, y) ((x) > (y) ? (x) : (y))
 
-#define PACK(size, alloc) ((size) | (alloc))
-
-#define GET(p) (*(unsigned int*)(p))
-#define PUT(p, val) ((*unsigned int*)(p) = (val))
-
-#define GET_SIZE(p) (GET(p) & ~0x7)
-#define GET_ALLOC(p) (GET(p) & 0x1)
-
-#define HDRP(bp) ((char*)(bp) - WSIZE)
-#define FTRP(bp) ((char*)(bp) + GET_SIZE(HDRP(bp)) - DSIZE)
-
-#define NEXT_BLKP(bp) ((char*)(bp) + GET_SIZE(((char*)(bp) - WSIZE)))
-#define PREV_BLKP(bp) ((char*)(bp) - GET_SIZE(((char*)(bp) - DSIZE)))
-
+char *heap_listp;
 
 int mm_init(void)
 {
@@ -88,7 +73,7 @@ static void *coalesce(void *bp)
     else {
         size += GET_SIZE(HDRP(PREV_BLKP(bp))) + GET_SIZE(FTRP(NEXT_BLKP(bp)));
         PUT(HDRP(PREV_BLKP(bp)), PACK(size, 0));
-        put(FTRP(NEXT_BLKP(bp)), PACK(size, 0));
+        PUT(FTRP(NEXT_BLKP(bp)), PACK(size, 0));
         bp = PREV_BLKP(bp);
     }
 
