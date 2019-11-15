@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libmemlib.a  CMakeFiles/memlib.dir/memlib.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libmemlib.a

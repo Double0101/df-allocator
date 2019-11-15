@@ -114,4 +114,4 @@ Temporary Items
 *.exe
 *.out
 *.app
-
+cmake-build-debug/

@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libmm.a  CMakeFiles/mm.dir/mm.c.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libmm.a
