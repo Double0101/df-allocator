@@ -1,6 +1,7 @@
 #include "memlib.h"
 
-
+/* init heap
+ * set top and bottom */
 void mem_init(void)
 {
     mem_heap = (char*) malloc(MAX_HEAP);
@@ -8,7 +9,7 @@ void mem_init(void)
     mem_max_addr = (char*)(mem_heap + MAX_HEAP);
 }
 
-
+/* resize available heap size */
 void *mem_sbrk(int incr)
 {
     char *old_brk = mem_brk;
