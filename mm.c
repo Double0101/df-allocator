@@ -3,7 +3,6 @@
 
 
 char *heap_listp;
-char *spare_searchp;
 
 int mm_init(void)
 {
@@ -26,7 +25,7 @@ static void *extend_heap(size_t words)
     char *bp;
     size_t size;
 
-    /* 8bytes memory alignment */
+    /* 8 bytes memory alignment */
     size = (words % 2) ? (words + 1) * WSIZE : words * WSIZE;
     if((long)(bp = mem_sbrk(size)) == -1)
         return NULL;
@@ -110,6 +109,16 @@ void *mm_malloc(size_t size)
 
 void *find_fit(size_t size)
 {
+    char *cur = NEXT_BLKP(heap_listp);
+    while (!GET_ALLOC(HDRP(cur)) 
+             || !GET_SIZE(FTRP(cur))) {
+        if (GET_SIZE(HDRP(cur)) >= size 
+              && GET_ALLOC(HDRP(cur))) {
+            return cur;
+        }
+        cur = NEXT_BLKP(cur);
+    }
+    
     return NULL;
 }
 

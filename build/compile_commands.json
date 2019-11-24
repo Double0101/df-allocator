@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/Users/Double/Documents/workspace/postgraduate/df-allocator/build",
+  "command": "/usr/local/bin/gcc-6    -std=c99 -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/test.dir/test.c.o   -c /Users/Double/Documents/workspace/postgraduate/df-allocator/test.c",
+  "file": "/Users/Double/Documents/workspace/postgraduate/df-allocator/test.c"
+},
+{
+  "directory": "/Users/Double/Documents/workspace/postgraduate/df-allocator/build",
+  "command": "/usr/local/bin/gcc-6    -std=c99 -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/mm.dir/mm.c.o   -c /Users/Double/Documents/workspace/postgraduate/df-allocator/mm.c",
+  "file": "/Users/Double/Documents/workspace/postgraduate/df-allocator/mm.c"
+},
+{
+  "directory": "/Users/Double/Documents/workspace/postgraduate/df-allocator/build",
+  "command": "/usr/local/bin/gcc-6    -std=c99 -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk   -o CMakeFiles/memlib.dir/memlib.c.o   -c /Users/Double/Documents/workspace/postgraduate/df-allocator/memlib.c",
+  "file": "/Users/Double/Documents/workspace/postgraduate/df-allocator/memlib.c"
+}
+]
