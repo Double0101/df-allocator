@@ -47,7 +47,8 @@ void mm_free(void *bp)
     coalesce(bp);
 }
 
-
+/* merge free block 
+ * bp dedicated to a big empty block */
 static void *coalesce(void *bp)
 {
     size_t prev_alloc = GET_ALLOC(FTRP(PREV_BLKP(bp)));
@@ -61,6 +62,7 @@ static void *coalesce(void *bp)
     else if (prev_alloc && !next_alloc) {
         size += GET_SIZE(HDRP(NEXT_BLKP(bp)));
         PUT(HDRP(bp), PACK(size, 0));
+        /* override the foot of next block */
         PUT(FTRP(bp), PACK(size, 0));
     }
 
@@ -111,9 +113,9 @@ void *find_fit(size_t size)
 {
     char *cur = NEXT_BLKP(heap_listp);
     while (!GET_ALLOC(HDRP(cur)) 
-             || !GET_SIZE(FTRP(cur))) {
-        if (GET_SIZE(HDRP(cur)) >= size 
-              && GET_ALLOC(HDRP(cur))) {
+             || GET_SIZE(FTRP(cur))) {
+        if (!GET_ALLOC(HDRP(cur))
+             && GET_SIZE(HDRP(cur)) >= size) {
             return cur;
         }
         cur = NEXT_BLKP(cur);
@@ -124,5 +126,14 @@ void *find_fit(size_t size)
 
 void place(void* bp, size_t size)
 {
-
+    size_t b_size = GET_SIZE(HDRP(bp));
+    size_t e_size = b_size - size;
+    
+    size = e_size <= DSIZE ? b_size : size;
+    PUT(HDRP(bp), PACK(size, 1));
+    PUT(FTRP(bp), PACK(size, 1));
+    if (e_size > DSIZE) {
+        PUT(HDRP(NEXT_BLKP(bp)), PACK(e_size, 0));
+        PUT(FTRP(NEXT_BLKP(bp)), PACK(e_size, 0));
+    }
 }

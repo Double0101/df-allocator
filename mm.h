@@ -20,8 +20,8 @@
 
 #define GET_SIZE(p) (GET(p) & ~0x7)
 /* whether this block was allocted 
- * 1 means unalloced
- * 0 means alloced */
+ * 0 means unalloced
+ * 1 means alloced */
 #define GET_ALLOC(p) (GET(p) & 0x1)
 
 #define HDRP(bp) ((char*)(bp) - WSIZE)
